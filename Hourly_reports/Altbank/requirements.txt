@@ -1,0 +1,4 @@
+numpy==1.24.3
+pandas==1.5.3
+pretty_html_table==0.9.16
+psycopg2==2.9.9
