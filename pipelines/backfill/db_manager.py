@@ -74,9 +74,3 @@ def dest_conn():
 
    return connection
 
-  
-# connection = dest_conn()
-# print(connection)
-# inw_connection.close
-
-
