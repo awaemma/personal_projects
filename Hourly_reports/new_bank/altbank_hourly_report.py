@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[6]:
 
 
 import pandas as pd
@@ -20,7 +17,7 @@ timestamp = datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
 
 
 #declaring system path
-sys_path = 'D:/Hourly_reports/Altbank/'
+sys_path = 'D:/Hourly_reports/newbank/'
 #declaing SQL script path
 folder_path = sys_path+'script'
 
@@ -29,7 +26,7 @@ f_open = open(sys_path + 'configurations.json')
 config = json.load(f_open)
 f_open.close()
 
-#setting db connections for Altbank_transfer DB
+#setting db connections for newbank_transfer DB
 db_params_transfer = {
     "host": config['DB_connection']['server'],
     "database": config['DB_connection']['database'],
@@ -38,7 +35,7 @@ db_params_transfer = {
     "port": config['DB_connection']['port']
 }
 
-#setting db connections for Altbank_billspayment DB
+#setting db connections for newbank_billspayment DB
 db_params_billspayment = {
     "host": config['DB_connection']['server'],
     "database": config['DB_connection']['database_billspayment'],
@@ -108,7 +105,7 @@ airtime = all_data["Airtime_Summary"]
 bills_payment = all_data["BillsPayment_Summary"]
 interbank = all_data["InterBank_Transaction_Summary"]
 intrabank = all_data["IntraBank_Transaction_Summary"]
-sterling_intra = all_data["Sterling_IntraBank_Transaction_Summary"]
+newbank_intra = all_data["newbank_IntraBank_Transaction_Summary"]
 
 #closing connection
 transfer_connection.close()
@@ -122,7 +119,7 @@ interbank_output = build_table(interbank, 'blue_dark',font_size='12px',font_fami
                                width_dict=['auto','250px', 'auto', 'auto','150px', '150px'],padding='1px')
 intrabank_output = build_table(intrabank, 'blue_dark',font_size='12px',font_family='Open Sans',
                                width_dict=['50px','300px', 'auto', 'auto','150px', '150px'],padding='1px')
-sterling_intra_output = build_table(sterling_intra, 'blue_dark',font_size='12px',font_family='Open Sans',
+newbank_intra_output = build_table(newbank_intra, 'blue_dark',font_size='12px',font_family='Open Sans',
                                     width_dict=['auto','250px', 'auto', 'auto','150px', '150px'],padding='1px')
 account_statement_output = build_table(account_statement, 'blue_dark',font_size='12px',font_family='Open Sans',
                                        width_dict=['auto','250px', 'auto', 'auto','180px', '180px'],padding='1px')
@@ -139,14 +136,14 @@ msg['To'] = recipient_email
 # msg['Cc'] = cc_email
 msg['Cc'] = ', '.join(cc_email)
 
-msg['Subject'] = f'Altbank App Hourly Report as at {timestamp}'
+msg['Subject'] = f'newbank App Hourly Report as at {timestamp}'
 salute = 'Dear Team,'
-message = f"Please see below Altbank app hourly report as at {timestamp}:"
+message = f"Please see below newbank app hourly report as at {timestamp}:"
 
 #body of the email
 email_body = f'<p>{salute}</p>{message}<br><br><br><caption><u><b>INTERBANK TRANSFERS</b></caption>{interbank_output}</table>'\
-             f'<br><br><caption><u><b>IMAL-IMAL INTRABANK TRANSFERS</b></u></caption>{intrabank_output}</table>'\
-             f'<br><br><caption><u><b>IMAL-STERLING INTRABANK TRANSFERS</b></u></caption>{sterling_intra_output}</table>'\
+             f'<br><br><caption><u><b>bigbank-bigbank INTRABANK TRANSFERS</b></u></caption>{intrabank_output}</table>'\
+             f'<br><br><caption><u><b>bigbank-newbank INTRABANK TRANSFERS</b></u></caption>{newbank_intra_output}</table>'\
              f'<br><br><caption><u><b>ACCOUNT STATEMENT DELIVERY</b></u></caption>{account_statement_output}</table>'\
              f'<br><br><caption><u><b>AIRTIME</b></u></caption>{airtime_output}</table>'\
              f'<br><br><caption><u><b>BILLS PAYMENT</b></u></caption>{bills_payment_output}</table>'\
@@ -166,10 +163,6 @@ try:
     print("Email sent successfully")
 except Exception as e:
     print("Error: Unable to send email -", str(e))
-
-
-# In[ ]:
-
 
 
 

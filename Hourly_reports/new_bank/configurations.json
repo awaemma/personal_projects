@@ -1,0 +1,19 @@
+{
+    "DB_connection": {
+        "server": "xxxxxxxxxxxxxxxxxxx",
+        "database": "xxxxxxxxxxxxxx",
+        "database_billspayment": "xxxxxxxxxxxxx",
+        "username": "xxxxxxxxxxxxx",
+        "password": "xxxxxxxxxx",
+        "port": "5432"
+    },
+
+    "SMTP_config": {
+        "smtp_server": "xxxxxxxxxxx",
+        "smtp_port": "xxxx",
+        "recipient_email": "xxxxxxxxxxxx",
+        "cc_email": ["xxxxxxxxxxxxxxx"],
+        "sender_email": "xxxxxxxxxx"
+    }
+}
+
